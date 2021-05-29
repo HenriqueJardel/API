@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import com.trabalho.api.domain.Aluno;
 import com.trabalho.api.dto.AlunoDTO;
 import com.trabalho.api.services.AlunoService;
@@ -38,7 +40,7 @@ public class AlunoResource {
     }
 
     @RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody AlunoDTO objDTO) {
+    public ResponseEntity<Void> insert(@Valid @RequestBody AlunoDTO objDTO) {
         Aluno aluno = service.fromDTO(objDTO);
         aluno = service.insert(aluno);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(aluno.getId()).toUri();

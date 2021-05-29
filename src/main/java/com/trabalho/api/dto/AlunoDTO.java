@@ -1,13 +1,24 @@
 package com.trabalho.api.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import com.trabalho.api.domain.Aluno;
+import javax.validation.constraints.NotEmpty;
 
-public class AlunoDTO {
+import com.trabalho.api.domain.Aluno;
+import com.trabalho.api.services.validation.AlunoInsert;
+
+@AlunoInsert
+public class AlunoDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     
     private Integer id;
+
+    @NotEmpty(message = "Rga deve ter 15 digitos, na forma XXXX.XXXX.XXX-X")
     private String rga;
+
+    @NotEmpty(message = "Nome não pode ser vazio!")
     private String nome;
     private String curso;
     private String situacao;

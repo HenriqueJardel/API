@@ -11,6 +11,7 @@ import com.trabalho.api.services.exception.ObjectNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AlunoService {
@@ -28,6 +29,7 @@ public class AlunoService {
         return obj.orElseThrow(() -> new ObjectNotFoundException("Aluno não encontrado id: " + id + ", Tipo: " + Aluno.class.getName()));
     }
 
+    @Transactional
     public Aluno insert(Aluno obj) {
         obj.setId(null);
         obj.setRegistrado_em(new Date());
@@ -55,7 +57,4 @@ public class AlunoService {
     public Aluno fromDTO(AlunoDTO objDTO) {
         return new Aluno(null, objDTO.getRga(), objDTO.getNome(), objDTO.getCurso(), objDTO.getSituacao(), objDTO.getRegistrado());
     }
-
-
-
 }

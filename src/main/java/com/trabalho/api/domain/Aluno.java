@@ -3,6 +3,7 @@ package com.trabalho.api.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,18 +12,16 @@ import javax.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 
-//Tabela do banco de dados
-
 @Entity
 public class Aluno implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
-    //Todas as colunas do bd
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(unique = true)
     private String rga;
     private String nome;
     private String curso;

@@ -21,7 +21,6 @@ public class ApiApplication implements CommandLineRunner {
 		SpringApplication.run(ApiApplication.class, args);
 	}
 
-	//Classe de teste
 	@Override
 	public void run(String... args) throws Exception {
 		
