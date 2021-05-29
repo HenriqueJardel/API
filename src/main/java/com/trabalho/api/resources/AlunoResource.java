@@ -5,6 +5,7 @@ import javax.validation.Valid;
 
 import com.trabalho.api.domain.Aluno;
 import com.trabalho.api.dto.AlunoDTO;
+import com.trabalho.api.dto.AlunoUpdateDTO;
 import com.trabalho.api.resources.util.URL;
 import com.trabalho.api.services.AlunoService;
 
@@ -52,7 +53,7 @@ public class AlunoResource {
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    public ResponseEntity<Void> update(@Valid @RequestBody AlunoDTO objDTO, @PathVariable Integer id) {
+    public ResponseEntity<Void> update(@Valid @RequestBody AlunoUpdateDTO objDTO, @PathVariable Integer id) {
         Aluno obj = service.fromDTO(objDTO);
         obj.setId(id);
         obj = service.update(obj);

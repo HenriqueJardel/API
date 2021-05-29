@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import com.trabalho.api.domain.Aluno;
 import com.trabalho.api.dto.AlunoDTO;
+import com.trabalho.api.dto.AlunoUpdateDTO;
 import com.trabalho.api.repository.AlunoRepository;
 import com.trabalho.api.services.exception.ObjectNotFoundException;
 
@@ -34,6 +35,7 @@ public class AlunoService {
     @Transactional
     public Aluno insert(Aluno obj) {
         obj.setId(null);
+        obj.setSituacao("ativo");
         obj.setRegistrado_em(new Date());
         return alunoRepository.save(obj);
     }
@@ -58,10 +60,16 @@ public class AlunoService {
         novo.setRga(obj.getRga());
         novo.setNome(obj.getNome());
         novo.setCurso(obj.getCurso());
-        novo.setSituacao(obj.getSituacao());
+        if (obj.getSituacao() != null) {
+            novo.setSituacao(obj.getSituacao());
+        }
     }
 
     public Aluno fromDTO(AlunoDTO objDTO) {
         return new Aluno(null, objDTO.getRga(), objDTO.getNome(), objDTO.getCurso(), objDTO.getSituacao(), objDTO.getRegistrado());
+    }
+
+    public Aluno fromDTO(AlunoUpdateDTO objDTO) {
+        return new Aluno(null, objDTO.getRga(), objDTO.getNome(), objDTO.getCurso(), objDTO.getSituacao(), null);
     }
 }
