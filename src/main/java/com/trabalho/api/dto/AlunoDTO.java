@@ -14,8 +14,6 @@ public class AlunoDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private Integer id;
-
-    @NotEmpty(message = "Rga deve ter 15 digitos, na forma XXXX.XXXX.XXX-X")
     private String rga;
 
     @NotEmpty(message = "Nome não pode ser vazio!")

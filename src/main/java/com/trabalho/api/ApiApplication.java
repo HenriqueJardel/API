@@ -26,11 +26,12 @@ public class ApiApplication implements CommandLineRunner {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-		Aluno a1 = new Aluno(null,"201919020151","teste","Analise de sistemas","ativo",sdf.parse("30/09/2017"));
-		Aluno a2 = new Aluno(null,"201919232101","testador","Medicina","ativo",sdf.parse("30/09/2017"));
-		Aluno a3 = new Aluno(null,"201919022120","tes","Farmacia","ativo",sdf.parse("30/09/2017"));
+		Aluno a1 = new Aluno(null,"201919020151","Maria","Analise de sistemas","ativo",sdf.parse("30/09/2017"));
+		Aluno a2 = new Aluno(null,"201919232101","João","Medicina","ativo",sdf.parse("30/09/2017"));
+		Aluno a3 = new Aluno(null,"201919022120","Henrique","Farmacia","ativo",sdf.parse("30/09/2017"));
+		Aluno a4 = new Aluno(null,"201919022121","Matheus","Farmacia","ativo",sdf.parse("30/09/2017"));
 		
-		alunoRepository.saveAll(Arrays.asList(a1,a2,a3));
+		alunoRepository.saveAll(Arrays.asList(a1,a2,a3, a4));
 	}
 
 }

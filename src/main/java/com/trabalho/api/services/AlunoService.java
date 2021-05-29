@@ -10,6 +10,8 @@ import com.trabalho.api.repository.AlunoRepository;
 import com.trabalho.api.services.exception.ObjectNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,6 +47,11 @@ public class AlunoService {
     public void delete(Integer id) {
         findbyId(id);
         alunoRepository.deleteById(id);
+    }
+
+    public Page<Aluno> findPage(String nome, Integer pagina, Integer limite) {
+        PageRequest pageRequest = PageRequest.of(pagina, limite);
+        return alunoRepository.findByNome(nome, pageRequest);
     }
 
     private void updateData(Aluno obj, Aluno novo) {

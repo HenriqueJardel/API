@@ -1,21 +1,21 @@
 package com.trabalho.api.resources;
 
 import java.net.URI;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import javax.validation.Valid;
 
 import com.trabalho.api.domain.Aluno;
 import com.trabalho.api.dto.AlunoDTO;
+import com.trabalho.api.resources.util.URL;
 import com.trabalho.api.services.AlunoService;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -27,9 +27,13 @@ public class AlunoResource {
     AlunoService service;
 
     @RequestMapping(method=RequestMethod.GET)
-    public ResponseEntity<List<AlunoDTO>> findAll() {
-        List<Aluno> list = service.findAll();
-        List<AlunoDTO> alunos = list.stream().map(obj -> new AlunoDTO(obj)).collect(Collectors.toList());
+    public ResponseEntity<Page<AlunoDTO>> findPage( 
+    @RequestParam(value="pagina", defaultValue="0") Integer pagina,
+    @RequestParam(value="limite", defaultValue="25") Integer limite,
+    @RequestParam(value="nome", defaultValue="") String nome ) {
+        String nomeDecoded = URL.decodeParam(nome);
+        Page<Aluno> list = service.findPage(nomeDecoded, pagina, limite);
+        Page<AlunoDTO> alunos = list.map(obj -> new AlunoDTO(obj));
         return ResponseEntity.ok().body(alunos);
     }
 
@@ -38,6 +42,7 @@ public class AlunoResource {
         Aluno aluno = service.findbyId(id);
         return ResponseEntity.ok().body(aluno);
     }
+
 
     @RequestMapping(method=RequestMethod.POST)
     public ResponseEntity<Void> insert(@Valid @RequestBody AlunoDTO objDTO) {
@@ -48,7 +53,7 @@ public class AlunoResource {
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestBody AlunoDTO objDTO, @PathVariable Integer id) {
+    public ResponseEntity<Void> update(@Valid @RequestBody AlunoDTO objDTO, @PathVariable Integer id) {
         Aluno obj = service.fromDTO(objDTO);
         obj.setId(id);
         obj = service.update(obj);
