@@ -46,9 +46,10 @@ public class AlunoService {
         return alunoRepository.save(novo);
     }
     
-    public void delete(Integer id) {
-        findbyId(id);
+    public Aluno delete(Integer id) {
+        Aluno aluno = findbyId(id);
         alunoRepository.deleteById(id);
+        return aluno;
     }
 
     public Page<Aluno> findPage(String nome, Integer pagina, Integer limite) {

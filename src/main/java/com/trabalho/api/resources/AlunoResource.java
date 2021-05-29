@@ -45,24 +45,24 @@ public class AlunoResource {
 
 
     @RequestMapping(method=RequestMethod.POST)
-    public ResponseEntity<Void> insert(@Valid @RequestBody AlunoDTO objDTO) {
+    public ResponseEntity<Aluno> insert(@Valid @RequestBody AlunoDTO objDTO) {
         Aluno aluno = service.fromDTO(objDTO);
         aluno = service.insert(aluno);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(aluno.getId()).toUri();
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(uri).body(aluno);
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    public ResponseEntity<Void> update(@Valid @RequestBody AlunoUpdateDTO objDTO, @PathVariable Integer id) {
-        Aluno obj = service.fromDTO(objDTO);
-        obj.setId(id);
-        obj = service.update(obj);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Aluno> update(@Valid @RequestBody AlunoUpdateDTO objDTO, @PathVariable Integer id) {
+        Aluno aluno = service.fromDTO(objDTO);
+        aluno.setId(id);
+        aluno = service.update(aluno);
+        return ResponseEntity.ok().body(aluno);
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        service.delete(id);
-        return ResponseEntity.noContent().build();
+	public ResponseEntity<Aluno> delete(@PathVariable Integer id) {
+        Aluno aluno = service.delete(id);
+        return ResponseEntity.ok().body(aluno);
     }
 }
