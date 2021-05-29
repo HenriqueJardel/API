@@ -27,13 +27,12 @@ public class AlunoResource {
     AlunoService service;
 
     @RequestMapping(method=RequestMethod.GET)
-    public ResponseEntity<Page<AlunoDTO>> findPage( 
+    public ResponseEntity<Page<Aluno>> findPage( 
     @RequestParam(value="pagina", defaultValue="0") Integer pagina,
     @RequestParam(value="limite", defaultValue="25") Integer limite,
     @RequestParam(value="nome", defaultValue="") String nome ) {
         String nomeDecoded = URL.decodeParam(nome);
-        Page<Aluno> list = service.findPage(nomeDecoded, pagina, limite);
-        Page<AlunoDTO> alunos = list.map(obj -> new AlunoDTO(obj));
+        Page<Aluno> alunos = service.findPage(nomeDecoded, pagina, limite);
         return ResponseEntity.ok().body(alunos);
     }
 
