@@ -7,7 +7,6 @@ Projeto desenvolvido a pedido do Prof: Hudson na matéria de programação web, 
 Pré-requisitos: 
 
 * <strong>Java 11<strong/>
-* <strong>Banco de dados mysql<strong/>
 
 ```bash
 # clonar repositório
