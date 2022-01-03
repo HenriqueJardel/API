@@ -1,6 +1,6 @@
 # API
 
-Projeto desenvolvido a pedido do Prof: Hudson na matéria de programação web, com o objetivo de construir um backend com conexão com banco de dados e somente com uma entidade.
+Projeto desenvolvido a pedido do Prof Hudson na matéria de programação web, com o objetivo de construir um backend com conexão com banco de dados e somente com uma entidade.
 
 ## Como executar o projeto
 
